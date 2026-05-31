@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3>{{ title }}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <!-- Поле Заголовок -->
+                    <div class="mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">{{ form.title.label }}</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <div class="alert alert-danger mt-1">{{ form.title.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле Краткое описание -->
+                    <div class="mb-3">
+                        <label for="{{ form.summary.id_for_label }}" class="form-label">{{ form.summary.label }}</label>
+                        {{ form.summary }}
+                        {% if form.summary.errors %}
+                            <div class="alert alert-danger mt-1">{{ form.summary.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле Текст новости -->
+                    <div class="mb-3">
+                        <label for="{{ form.content.id_for_label }}" class="form-label">{{ form.content.label }}</label>
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                            <div class="alert alert-danger mt-1">{{ form.content.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
